@@ -24,7 +24,7 @@ const FooterSection = () => {
             textAlign="center"
             fontSize={isSmallerThanMd ? "16px" : "40px"}
           >
-            “Resultado rapido, diagnostico serteiro, saude duradora”
+            “Resultado rapido, diagnostico certeiro, saude duradora”
           </Heading>
         </Fade>
       </Stack>
