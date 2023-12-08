@@ -1,0 +1,39 @@
+{
+  "name": "foca_web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@chakra-ui/stepper": "^2.3.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@tamagui/core": "^1.79.7",
+    "framer-motion": "^10.16.15",
+    "infinite-react-carousel": "^1.2.11",
+    "next": "14.0.3",
+    "next-video": "^0.9.1",
+    "react": "^18",
+    "react-awesome-reveal": "^4.2.7",
+    "react-dom": "^18",
+    "react-icons": "^4.12.0",
+    "react-moving-text": "^0.0.7",
+    "react-slick": "^0.29.0",
+    "react-type-animation": "^3.2.0",
+    "sass": "^1.69.5",
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "typescript": "^5"
+  }
+}
