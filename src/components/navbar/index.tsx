@@ -57,42 +57,6 @@ const Navbar = () => {
                     alignContent="center"
                     gap="20px"
                   >
-                    <Link href="/sobre">
-                      <Text
-                        color="#707070"
-                        fontWeight="600"
-                        transition="all 0.3s ease-in-out"
-                        _hover={{
-                          color: "#1e1e1e",
-                        }}
-                      >
-                        Sobre Nos
-                      </Text>
-                    </Link>
-                    <Link href="/problema">
-                      <Text
-                        color="#707070"
-                        transition="all 0.3s ease-in-out"
-                        fontWeight="600"
-                        _hover={{
-                          color: "#1e1e1e",
-                        }}
-                      >
-                        Problema
-                      </Text>
-                    </Link>
-                    <Link href="/analises">
-                      <Text
-                        color="#707070"
-                        transition="all 0.3s ease-in-out"
-                        fontWeight="600"
-                        _hover={{
-                          color: "#1e1e1e",
-                        }}
-                      >
-                        Analises
-                      </Text>
-                    </Link>
                     <Flex justifyContent="center">
                       <Button
                         w="200px"
@@ -124,45 +88,6 @@ const Navbar = () => {
           alignContent="center"
           gap="30px"
         >
-          <Link href="/about">
-            <Text
-              color="#707070"
-              fontWeight="600"
-              transition="all 0.3s ease-in-out"
-              mt="10px"
-              _hover={{
-                color: "#1e1e1e",
-              }}
-            >
-              Sobre Nos
-            </Text>
-          </Link>
-          <Link href="/problem">
-            <Text
-              color="#707070"
-              transition="all 0.3s ease-in-out"
-              fontWeight="600"
-              mt="10px"
-              _hover={{
-                color: "#1e1e1e",
-              }}
-            >
-              Problema
-            </Text>
-          </Link>
-          <Link href="/analysis">
-            <Text
-              color="#707070"
-              transition="all 0.3s ease-in-out"
-              fontWeight="600"
-              mt="10px"
-              _hover={{
-                color: "#1e1e1e",
-              }}
-            >
-              Analises
-            </Text>
-          </Link>
           <Button
             w="200px"
             color="#f2f2f2"

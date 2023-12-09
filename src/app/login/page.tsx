@@ -166,7 +166,7 @@ const Login = () => {
             <Link href="/forgot">Esqueceu sua palavra passe?</Link>
           </Heading>
 
-          <Button title="Login" bg="#0081A8" size="lg" onClick={onSubmit}>
+          <Button title="Login" bg="#222233" size="lg" onClick={onSubmit}>
             <Text fontSize="sm" color="white">
               {status === true ? <Spinner /> : "Login"}
             </Text>
