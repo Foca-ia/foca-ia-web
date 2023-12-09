@@ -11,8 +11,8 @@ import { AuthProvider } from "@/Context/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Akin",
-  description: "Desenvolvido por OsapiCare",
+  title: "Foca.ia",
+  description: "Desenvolvido por Foca.ia",
 };
 
 export default function RootLayout({
