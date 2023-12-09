@@ -24,7 +24,7 @@ import Image from "next/image";
 import { BsThreeDots } from "react-icons/bs";
 
 import BarChartComponent from "@/components/column-chart";
-import logo from "../../../../public/assets/images/logo.png";
+import logo from "../../../../public/assets/images/LOGO FOCA 3-02.png";
 import StackedAreaChartComponent from "@/components/stackedAreaChart";
 import { TableSortPatients } from "@/components/TableSortPatients";
 import Link from "next/link";

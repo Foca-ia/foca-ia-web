@@ -16,7 +16,8 @@ import {
 import Image from "next/image";
 
 import loginbg from "../../../../public/assets/images/loginbg.png";
-import logo from "../../../../public/assets/images/logo.png";
+import logo from "../../../../public/assets/images/LOGO FOCA 3-02.png";
+
 import Link from "next/link";
 import { BsChevronLeft } from "react-icons/bs";
 import { API } from "@/services/api";
