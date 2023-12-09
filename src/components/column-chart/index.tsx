@@ -82,7 +82,7 @@ export default class BarChartComponent extends PureComponent {
               {data.map((entry, index) => (
                 <Cell
                   cursor="pointer"
-                  fill={index === activeIndex ? "#000000" : "#000000"}
+                  fill={index === activeIndex ? "#222233" : "#222233"}
                   key={`cell-${index}`}
                 />
               ))}
