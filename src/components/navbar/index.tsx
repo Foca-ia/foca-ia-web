@@ -124,7 +124,7 @@ const Navbar = () => {
           alignContent="center"
           gap="30px"
         >
-          <Link href="/sobre">
+          <Link href="/about">
             <Text
               color="#707070"
               fontWeight="600"
@@ -137,7 +137,7 @@ const Navbar = () => {
               Sobre Nos
             </Text>
           </Link>
-          <Link href="/problema">
+          <Link href="/problem">
             <Text
               color="#707070"
               transition="all 0.3s ease-in-out"
@@ -150,7 +150,7 @@ const Navbar = () => {
               Problema
             </Text>
           </Link>
-          <Link href="/analises">
+          <Link href="/analysis">
             <Text
               color="#707070"
               transition="all 0.3s ease-in-out"
