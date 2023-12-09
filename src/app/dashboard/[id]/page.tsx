@@ -29,9 +29,12 @@ import StackedAreaChartComponent from "@/components/stackedAreaChart";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { DrawerMenu } from "@/components/Navbar/screen";
+import { Progress } from "antd";
 
 function Dashboard() {
   const params = useParams();
+
+  const twoColors = { "0%": "#108ee9", "100%": "#222233" };
 
   return (
     <Flex
@@ -90,7 +93,7 @@ function Dashboard() {
           <SimpleGrid
             spacing={7}
             mt="5"
-            templateColumns="repeat(auto-fill, minmax(180px, 4fr))"
+            templateColumns="repeat(auto-fill, minmax(180px, 3fr))"
             alignSelf="center"
             alignItems="center"
             justifyContent="center"
@@ -150,33 +153,11 @@ function Dashboard() {
 
             <Card
               height="220px"
-              width="490px"
+              width="220px"
               bgColor="gray.200"
-              padding="4"
-              size="sm"
               borderRadius="10"
-              boxSizing="border-box"
             >
-              <CardBody>
-                <Text fontSize="md" color="gray.900">
-                  CEL-12898129.png
-                </Text>
-                <Text fontSize="md" color="gray.900">
-                  CEL-12898129.png
-                </Text>
-                <Text fontSize="md" color="gray.900">
-                  CEL-12898129.png
-                </Text>
-                <Text fontSize="md" color="gray.900">
-                  CEL-12898129.png
-                </Text>
-                <Text fontSize="md" color="gray.900">
-                  CEL-12898129.png
-                </Text>
-                <Text fontSize="md" color="gray.900">
-                  CEL-12898129.png
-                </Text>
-              </CardBody>
+              <Progress type="circle" percent={90} strokeColor={twoColors} />
             </Card>
           </Flex>
 

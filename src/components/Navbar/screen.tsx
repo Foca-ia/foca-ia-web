@@ -259,35 +259,6 @@ const DrawerMenu: React.FC = () => {
             </MenuList>
           </Menu>
         </ListItem>
-        <ListItem>
-          <Menu>
-            <MenuButton
-              px={10}
-              py={2}
-              m="260px"
-              transition="all 0.2s"
-              borderRadius="md"
-              position="fixed"
-              ml="-5"
-              _hover={{ bg: "gray.200" }}
-              _expanded={{ bg: "blue.400" }}
-              _focus={{ boxShadow: "outline" }}
-            >
-              <Text
-                display="flex"
-                flexDirection="row"
-                fontSize="sm"
-                color="black"
-                justifyContent="center"
-                alignItems="center"
-                gap="20px"
-              >
-                <BsThreeDots />
-                Labelbox
-              </Text>
-            </MenuButton>
-          </Menu>
-        </ListItem>
       </List>
     </Box>
   );
