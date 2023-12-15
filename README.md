@@ -18,13 +18,7 @@
     Node.js v18+ instalado
     Yarn, npm, pnpm, bun
 
-## Passos para Executar Localmente
-# Clone o repositorio
 
-``` bash
-git clone https://github.com/OsapiCare/osapi-care-web-app
-cd osapi-care-web-app
-```
 
 # Instale as dependencias
 
