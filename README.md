@@ -1,5 +1,4 @@
-# Osapi Care Web App / Akin 1.0.0
-#### Front-end para o Akin
+
 
 ### Tecnologias Utilizadas
 
