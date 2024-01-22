@@ -5,7 +5,7 @@ import { Bounce, Fade } from "react-awesome-reveal";
 import Image from "next/image";
 
 import diag1 from "../../../public/assets/images/diag1.png";
-import diag2 from "../../../public/assets/images/diag1.png";
+import diag2 from "../../../public/assets/images/diag2.png";
 
 const Description = () => {
   return (
