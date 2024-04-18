@@ -18,7 +18,7 @@ import {
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
 import { Box, Button, Stack } from "@chakra-ui/react";
-import { BsPlus } from "react-icons/bs";
+import { BsPlus, BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { CreatePatientModal } from "../create-patient-modal";
 import { useRouter } from "next/navigation";
 
@@ -26,6 +26,10 @@ interface RowData {
   name: string;
   email: string;
   company: string;
+  result: string;
+  doenca: string;
+  age: string;
+  date: string;
 }
 
 interface ThProps {
@@ -91,61 +95,46 @@ const data = [
     name: "Athena Weissnat",
     company: "Little - Rippin",
     email: "Elouise.Prohaska@yahoo.com",
+    result: "Negativo",
+    doenca: "Malaria",
+    age: "24",
+    date: "12/04/2024",
   },
   {
     name: "Deangelo Runolfsson",
     company: "Greenfelder - Krajcik",
     email: "Kadin_Trantow87@yahoo.com",
+    result: "Positivo",
+    doenca: "Malaria",
+    age: "24",
+    date: "12/04/2024",
   },
   {
     name: "Danny Carter",
     company: "Kohler and Sons",
     email: "Marina3@hotmail.com",
+    result: "Negativo",
+    doenca: "Malaria",
+    age: "24",
+    date: "12/04/2024",
   },
   {
     name: "Trace Tremblay PhD",
     company: "Crona, Aufderhar and Senger",
     email: "Antonina.Pouros@yahoo.com",
+    result: "Negativo",
+    doenca: "Malaria",
+    age: "24",
+    date: "12/04/2024",
   },
   {
     name: "Derek Dibbert",
     company: "Gottlieb LLC",
     email: "Abagail29@hotmail.com",
-  },
-  {
-    name: "Viola Bernhard",
-    company: "Funk, Rohan and Kreiger",
-    email: "Jamie23@hotmail.com",
-  },
-  {
-    name: "Austin Jacobi",
-    company: "Botsford - Corwin",
-    email: "Genesis42@yahoo.com",
-  },
-  {
-    name: "Hershel Mosciski",
-    company: "Okuneva, Farrell and Kilback",
-    email: "Idella.Stehr28@yahoo.com",
-  },
-  {
-    name: "Mylene Ebert",
-    company: "Kirlin and Sons",
-    email: "Hildegard17@hotmail.com",
-  },
-  {
-    name: "Lou Trantow",
-    company: "Parisian - Lemke",
-    email: "Hillard.Barrows1@hotmail.com",
-  },
-  {
-    name: "Dariana Weimann",
-    company: "Schowalter - Donnelly",
-    email: "Colleen80@gmail.com",
-  },
-  {
-    name: "Dr. Christy Herman",
-    company: "VonRueden - Labadie",
-    email: "Lilyan98@gmail.com",
+    result: "Negativo",
+    doenca: "Malaria",
+    age: "24",
+    date: "12/04/2024",
   },
 ];
 
@@ -180,23 +169,24 @@ export function TableSortDiagnostics() {
 
   const rows = sortedData.map((row) => (
     <Table.Tr key={row.name}>
+      <Table.Td>{row.name}</Table.Td>
+      <Table.Td>{row.result}</Table.Td>
       <Table.Td>
-        <Button
-          fontWeight="normal"
-          onClick={() => handleRoute()}
-          bgColor="white"
-        >
-          {row.name}
+        <Text>{row.doenca}</Text>
+      </Table.Td>
+      <Table.Td>{row.age}</Table.Td>
+      <Table.Td>{row.date}</Table.Td>
+      <Table.Td>
+        <Button backgroundColor="transparent">
+          <BsThreeDotsVertical />
         </Button>
       </Table.Td>
-      <Table.Td>{row.email}</Table.Td>
-      <Table.Td>{row.company}</Table.Td>
     </Table.Tr>
   ));
 
   return (
     <ScrollArea>
-      <Stack
+      {/* <Stack
         display="flex"
         height="50px"
         flexDirection="row"
@@ -223,35 +213,66 @@ export function TableSortDiagnostics() {
           value={search}
           onChange={handleSearchChange}
         />
-      </Stack>
+      </Stack> */}
       <Table
         horizontalSpacing="md"
         verticalSpacing="xs"
         miw={700}
         layout="fixed"
       >
-        <Table.Tbody>
+        <Table.Tbody
+          style={{
+            backgroundColor: "#F7F9FB",
+            borderRadius: "20px",
+            border: "1px",
+            borderColor: "#E5E7EB",
+            "&:hover": {
+              backgroundColor: "#F7F9FB",
+            },
+          }}
+        >
           <Table.Tr>
             <Th
               sorted={sortBy === "name"}
               reversed={reverseSortDirection}
               onSort={() => setSorting("name")}
             >
-              Name
+              Nome
             </Th>
             <Th
-              sorted={sortBy === "email"}
+              sorted={sortBy === "result"}
               reversed={reverseSortDirection}
-              onSort={() => setSorting("email")}
+              onSort={() => setSorting("result")}
             >
-              Email
+              Resultados
             </Th>
             <Th
-              sorted={sortBy === "company"}
+              sorted={sortBy === "doenca"}
               reversed={reverseSortDirection}
-              onSort={() => setSorting("company")}
+              onSort={() => setSorting("doenca")}
             >
-              Company
+              Doença
+            </Th>
+            <Th
+              sorted={sortBy === "age"}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting("age")}
+            >
+              Idade
+            </Th>
+            <Th
+              sorted={sortBy === "date"}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting("date")}
+            >
+              Data
+            </Th>
+            <Th
+              sorted={sortBy === "date"}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting("date")}
+            >
+              Ação
             </Th>
           </Table.Tr>
         </Table.Tbody>

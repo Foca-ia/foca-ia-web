@@ -20,16 +20,18 @@ import {
   CardFooter,
   CardBody,
 } from "@chakra-ui/react";
-import Image from "next/image";
-import { BsThreeDots } from "react-icons/bs";
 
-import BarChartComponent from "@/components/column-chart";
-import logo from "../../../../public/assets/images/logo.png";
-import StackedAreaChartComponent from "@/components/stackedAreaChart";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { DrawerMenu } from "@/components/Navbar/screen";
-import { Progress } from "antd";
+import { TableSortDiagnostics } from "@/components/TableSortDiagnostics";
+import {
+  BsFileSpreadsheetFill,
+  BsFillArrowUpRightCircleFill,
+  BsFillPeopleFill,
+  BsHeart,
+  BsPeopleFill,
+} from "react-icons/bs";
+import LineAreachart from "@/components/LineAreaChart";
 
 function Dashboard() {
   const params = useParams();
@@ -37,135 +39,191 @@ function Dashboard() {
   const twoColors = { "0%": "#108ee9", "100%": "#222233" };
 
   return (
-    <Flex
-      direction="column"
-      h="100vh"
-      w="100vw"
-      flex="1"
-      boxSizing="content-box"
-      alignSelf="center"
-    >
-      {/* Top Header */}
-      <Flex
-        justify="center"
-        alignItems="center"
-        bgColor="white"
-        height="10vh"
-        width="100%"
-        alignSelf="center"
-        borderBottom="1px"
-        borderColor="gray.200"
-      >
-        <Flex
-          fontSize="md"
-          fontWeight="normal"
-          mr="10"
-          color="black"
-          display="flex"
-          padding="4"
-        >
-          <Text color="blackAlpha.700">
-            Dashboard /
-            <strong
-              style={{
-                color: "black",
-              }}
-            >
-              {" "}
-              Overview
-            </strong>
-          </Text>
-        </Flex>
-      </Flex>
+    <Flex flexDirection="column" width="100%">
+      <DrawerMenu>
+        <Box marginTop="70px" width="100%" height="100px">
+          <TableSortDiagnostics />
 
-      {/* Main Content */}
-      <Flex flex="1">
-        <DrawerMenu />
-
-        {/* Middle Content */}
-        <Box
-          w="100%"
-          gridGap="4"
-          bgColor="white"
-          padding="20px"
-          alignItems="center"
-        >
-          <SimpleGrid
-            spacing={7}
-            mt="5"
-            templateColumns="repeat(auto-fill, minmax(180px, 3fr))"
-            alignSelf="center"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Card height="100px" bgColor="blue.100" size="sm" borderRadius="10">
-              <CardHeader>
-                <Heading size="sm"> Data</Heading>
-              </CardHeader>
-              <CardBody>721</CardBody>
-              <CardFooter></CardFooter>
-            </Card>
-
-            <Card height="100px" bgColor="gray.200" size="sm" borderRadius="10">
-              <CardHeader>
-                <Heading size="sm"> Positive results</Heading>
-              </CardHeader>
-              <CardBody>361</CardBody>
-              <CardFooter></CardFooter>
-            </Card>
-
-            <Card height="100px" bgColor="blue.100" size="sm" borderRadius="10">
-              <CardHeader>
-                <Heading size="sm"> Negative results</Heading>
-              </CardHeader>
-              <CardBody>123</CardBody>
-              <CardFooter></CardFooter>
-            </Card>
-
-            <Card height="100px" bgColor="gray.200" size="sm" borderRadius="10">
-              <CardHeader>
-                <Heading size="sm"> Precision</Heading>
-              </CardHeader>
-              <CardBody>70%</CardBody>
-              <CardFooter></CardFooter>
-            </Card>
-          </SimpleGrid>
-
-          <Flex
-            flexWrap="wrap"
+          <Stack
+            width="100%"
+            marginTop="70px"
+            direction="row"
             gap="20px"
-            mt="5"
-            alignItems="center"
-            justifyContent="left"
+            flexWrap="wrap"
           >
-            <Card
-              height="220px"
-              width="490px"
-              bgColor="gray.200"
-              size="sm"
-              borderRadius="10"
-              boxSizing="border-box"
+            <Box
+              width="260px"
+              height="140px"
+              borderRadius="20px"
+              border="1px solid #EBE8FF"
+              padding="20px"
             >
-              <CardBody>
-                <BarChartComponent />
-              </CardBody>
-            </Card>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>Diagnosticos Hoje</Text>
+                <BsHeart size={28} />
+              </Stack>
 
-            <Card
-              height="220px"
-              width="220px"
-              bgColor="gray.200"
-              borderRadius="10"
+              <Text fontSize="3xl">22</Text>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                marginTop="10px"
+              >
+                <Stack direction="row">
+                  <BsFillArrowUpRightCircleFill color="#6AD2A0" />
+                  <Text fontSize="12px">+15% do dia anterior</Text>
+                </Stack>
+
+                <Text
+                  fontSize="12px"
+                  textDecoration="underline"
+                  color="#6AD2A0"
+                  cursor="pointer"
+                >
+                  Ver mais
+                </Text>
+              </Stack>
+            </Box>
+
+            <Box
+              width="260px"
+              height="140px"
+              borderRadius="20px"
+              border="1px solid #EBE8FF"
+              padding="20px"
             >
-              <Progress type="circle" percent={90} strokeColor={twoColors} />
-            </Card>
-          </Flex>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>Pacientes</Text>
+                <BsFillPeopleFill size={28} />
+              </Stack>
 
-          <Box height="220px" width="100%" mt="5" p="20px">
-            <StackedAreaChartComponent />
-          </Box>
+              <Text fontSize="3xl">122</Text>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                marginTop="10px"
+              ></Stack>
+            </Box>
+
+            <Box
+              width="260px"
+              height="140px"
+              borderRadius="20px"
+              border="1px solid #EBE8FF"
+              padding="20px"
+            >
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>Total de resultados</Text>
+                <BsFileSpreadsheetFill size={28} />
+              </Stack>
+
+              <Text fontSize="3xl">22</Text>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                marginTop="10px"
+              >
+                <Stack direction="row">
+                  <BsFillArrowUpRightCircleFill color="#6AD2A0" />
+                  <Text fontSize="12px">+15% do dia anterior</Text>
+                </Stack>
+
+                <Text
+                  fontSize="12px"
+                  textDecoration="underline"
+                  color="#6AD2A0"
+                  cursor="pointer"
+                >
+                  Ver mais
+                </Text>
+              </Stack>
+            </Box>
+
+            <Box
+              width="260px"
+              height="140px"
+              borderRadius="20px"
+              border="1px solid #EBE8FF"
+              padding="20px"
+            >
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Text>Novos pacientes</Text>
+                <BsPeopleFill size={28} />
+              </Stack>
+
+              <Text fontSize="3xl">22</Text>
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                marginTop="10px"
+              >
+                <Stack direction="row">
+                  <BsFillArrowUpRightCircleFill color="#6AD2A0" />
+                  <Text fontSize="12px">+15% do dia anterior</Text>
+                </Stack>
+
+                <Text
+                  fontSize="12px"
+                  textDecoration="underline"
+                  color="#6AD2A0"
+                  cursor="pointer"
+                >
+                  Ver mais
+                </Text>
+              </Stack>
+            </Box>
+          </Stack>
+
+          <Stack marginTop="30px" direction="row">
+            <Box
+              width="650px"
+              height="340px"
+              border="1px solid #EBE8FF"
+              padding="24px"
+              borderRadius="20px"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text marginBottom="10px">Resultados Mensais</Text>
+
+              <LineAreachart />
+            </Box>
+
+            <Box
+              width="440px"
+              height="340px"
+              padding="24px"
+              borderRadius="20px"
+              alignItems="center"
+              justifyContent="center"
+              backgroundColor="#24CEDE"
+              boxShadow="0 4px 20px #24CEDE, 0 1px 3px #24CEDE"
+            >
+              {/* Conteúdo do Box aqui */}
+            </Box>
+          </Stack>
         </Box>
-      </Flex>
+      </DrawerMenu>
     </Flex>
   );
 }

@@ -26,7 +26,7 @@ import { BsThreeDots } from "react-icons/bs";
 
 import BarChartComponent from "@/components/column-chart";
 import logo from "../../../../public/assets/images/logo.png";
-import StackedAreaChartComponent from "@/components/stackedAreaChart";
+import StackedAreaChartComponent from "@/components/LineAreaChart";
 import { TableSortPatients } from "@/components/TableSortPatients";
 import Link from "next/link";
 import { InsertDataModal } from "@/components/insert-data-modal";
