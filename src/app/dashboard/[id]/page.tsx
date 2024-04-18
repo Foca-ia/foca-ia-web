@@ -32,6 +32,9 @@ import {
   BsPeopleFill,
 } from "react-icons/bs";
 import LineAreachart from "@/components/LineAreaChart";
+import Image from "next/image";
+import LineImage from "../../../../public/assets/images/LineComponent.png";
+import Footer from "@/components/footer";
 
 function Dashboard() {
   const params = useParams();
@@ -194,12 +197,19 @@ function Dashboard() {
             </Box>
           </Stack>
 
-          <Stack marginTop="30px" direction="row">
+          <Stack
+            width="100%"
+            marginTop="30px"
+            direction="row"
+            gap="10px"
+            flexWrap="wrap"
+            alignItems="center"
+          >
             <Box
               width="650px"
-              height="340px"
+              height="380px"
               border="1px solid #EBE8FF"
-              padding="24px"
+              padding="33px"
               borderRadius="20px"
               alignItems="center"
               justifyContent="center"
@@ -209,19 +219,47 @@ function Dashboard() {
               <LineAreachart />
             </Box>
 
-            <Box
+            <Flex
               width="440px"
-              height="340px"
-              padding="24px"
+              height="380px"
+              padding="30px"
               borderRadius="20px"
               alignItems="center"
-              justifyContent="center"
+              justifyContent="space-between"
               backgroundColor="#24CEDE"
               boxShadow="0 4px 20px #24CEDE, 0 1px 3px #24CEDE"
             >
-              {/* Conteúdo do Box aqui */}
-            </Box>
+              <Stack
+                direction="column"
+                justifyContent="space-between"
+                gap="90px"
+              >
+                <Stack gap="-10px">
+                  <Text color="#FFFFFF">Precisao dos resultados</Text>
+                  <Text fontSize="30px" color="#FFFFFF" fontWeight="bold">
+                    82%
+                  </Text>
+                  <Text color="#FFFFFF">Alcançado</Text>
+                </Stack>
+
+                <Stack gap="-10px">
+                  <Text color="#FFFFFF">Seu Plano</Text>
+                  <Text fontSize="30px" color="#FFFFFF" fontWeight="bold">
+                    Enterprise
+                  </Text>
+                  <Stack direction="row" alignItems="center">
+                    <Text color="#FFFFFF">No. de faturas</Text>
+                    <BsFillArrowUpRightCircleFill color="#FFD84D" />
+                    <Text color="#FFFFFF">12</Text>
+                  </Stack>
+                </Stack>
+              </Stack>
+              <Stack marginRight="20px">
+                <Image src={LineImage} alt="image" />
+              </Stack>
+            </Flex>
           </Stack>
+          <Footer />
         </Box>
       </DrawerMenu>
     </Flex>

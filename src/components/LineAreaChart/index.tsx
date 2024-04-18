@@ -56,13 +56,10 @@ const data = [
 ];
 
 export default class LineAreachart extends PureComponent {
-  static demoUrl =
-    "https://codesandbox.io/s/line-chart-width-xaxis-padding-sujqi";
-
   render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart width={500} height={300} data={data}>
+        <LineChart width={500} height={400} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
           <YAxis />

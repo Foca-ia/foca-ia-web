@@ -57,7 +57,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
     <Box flexDirection="row" width="100%" height="100vh">
       <Box
         w="25%"
-        height="100vh"
+        height="100%"
         alignItems="start"
         bgColor="white"
         padding={30}
@@ -75,25 +75,25 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
           alt="Osapicare logo"
           style={{
             position: "fixed",
-            top: "10px",
+            top: "50px",
             left: "50px",
             alignSelf: "center",
           }}
         />
 
-        <List spacing="2" justifyContent="start" alignItems="start" mt="32">
+        <List spacing="2" justifyContent="start" alignItems="start" mt="100px">
           <ListItem>
             <Menu>
               <Link href={`/dashboard/${params.id}`}>
                 <MenuButton
-                  px={10}
+                  px={12}
                   py={2}
                   m="10px"
                   position="fixed"
                   ml="-5"
                   transition="all 0.2s"
                   borderRadius="md"
-                  _hover={{ bg: "gray.200" }}
+                  _hover={{ bg: "white" }}
                   _expanded={{ bg: "blue.400" }}
                   _focus={{ boxShadow: "outline" }}
                 >
@@ -103,8 +103,9 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                     fontSize="sm"
                     justifyContent="space-between"
                     alignItems="center"
-                    color="black"
+                    color="#FFF"
                     gap="20px"
+                    _hover={{ color: "black" }}
                   >
                     <BsThreeDots />
                     Dashboard
@@ -117,7 +118,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             <Menu>
               <Link href={`/analyst/${params.id}`}>
                 <MenuButton
-                  px={10}
+                  px={12}
                   py={2}
                   m="60px"
                   position="fixed"
@@ -134,7 +135,8 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                     fontSize="sm"
                     justifyContent="space-between"
                     alignItems="center"
-                    color="black"
+                    color="#FFF"
+                    _hover={{ color: "white" }}
                     gap="20px"
                   >
                     <BsThreeDots />
@@ -149,7 +151,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             <Menu>
               <Link href={`/patients/${params.id}`}>
                 <MenuButton
-                  px={10}
+                  px={12}
                   py={2}
                   m="110px"
                   position="fixed"
@@ -166,7 +168,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                     fontSize="sm"
                     justifyContent="space-between"
                     alignItems="center"
-                    color="black"
+                    color="#FFF"
                     gap="20px"
                   >
                     <BsThreeDots />
@@ -180,14 +182,14 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
           <ListItem>
             <Menu>
               <MenuButton
-                px={10}
+                px={12}
                 py={2}
                 m="160px"
                 position="fixed"
                 ml="-5"
                 transition="all 0.2s"
                 borderRadius="md"
-                _hover={{ bg: "gray.200" }}
+                _hover={{ bg: "white" }}
                 _expanded={{ bg: "blue.400" }}
                 _focus={{ boxShadow: "outline" }}
               >
@@ -197,7 +199,8 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                   fontSize="sm"
                   justifyContent="space-between"
                   alignItems="center"
-                  color="black"
+                  color="white"
+                  _hover={{ color: "white" }}
                   gap="20px"
                 >
                   <BsThreeDots />
@@ -216,7 +219,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
           <ListItem>
             <Menu>
               <MenuButton
-                px={10}
+                px={12}
                 py={2}
                 m="210px"
                 position="fixed"
@@ -232,7 +235,8 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                   flexDirection="row"
                   fontSize="sm"
                   justifyContent="center"
-                  color="black"
+                  color="white"
+                  _hover={{ color: "white" }}
                   alignItems="center"
                   gap="20px"
                 >
