@@ -5,21 +5,9 @@ import {
   Box,
   Flex,
   Text,
-  List,
-  ListItem,
   Heading,
   Avatar,
   Stack,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  CardFooter,
-  CardBody,
   Button,
   Input,
 } from "@chakra-ui/react";
@@ -29,8 +17,12 @@ import logo from "../../../public/assets/images/LOGO FOCA 3-02.png";
 import { useParams, useRouter } from "next/navigation";
 import useAuth from "@/Context/AuthProvider/useAuth";
 import { API } from "@/services/api";
+import { RxDashboard } from "react-icons/rx";
+import { FaFileAlt, FaNotesMedical } from "react-icons/fa";
 
 import { IconTriangleInvertedFilled } from "@tabler/icons-react";
+import { CiMoneyCheck1 } from "react-icons/ci";
+import { BiSolidReport } from "react-icons/bi";
 
 const DrawerMenu = ({ children }: React.PropsWithChildren) => {
   const [open, setOpen] = useState(false);
@@ -54,208 +46,104 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
   const params = useParams();
 
   return (
-    <Box flexDirection="row" width="100%" height="100vh">
-      <Box
-        w="25%"
-        height="100%"
-        alignItems="start"
-        bgColor="white"
-        padding={30}
-        display={sidebarVisible === true ? "block" : "none"}
-        background="linear-gradient(180deg, #FBFBFB, #24CEDE)"
-        transition="ease-in-out"
-        transitionDelay=".2s"
-        animation="ease-in-out"
+    <Box
+      flexDirection="row"
+      width="100%"
+      height="100vh"
+      background="linear-gradient(180deg, #FBFBFB, #24CEDE)"
+    >
+      <Stack
+        style={{
+          position: "fixed",
+          top: "50px",
+          left: "50px",
+          alignSelf: "center",
+        }}
       >
         <Image
           src={logo}
           height={150}
           width={150}
           quality={100}
-          alt="Osapicare logo"
-          style={{
-            position: "fixed",
-            top: "50px",
-            left: "50px",
-            alignSelf: "center",
-          }}
+          alt="Foca.ia logo"
         />
+        <Stack marginTop="50px" gap="10px">
+          <Button
+            backgroundColor="transparent"
+            paddingX="30px"
+            color="#000000"
+            _active={{ backgroundColor: "white", color: "#24CEDE" }}
+            _focus={{ backgroundColor: "white", color: "#24CEDE" }}
+            _hover={{ backgroundColor: "white", color: "#24CEDE" }}
+            onClick={() => router.push("/")}
+            leftIcon={<RxDashboard />}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            Dashboard
+          </Button>
 
-        <List spacing="2" justifyContent="start" alignItems="start" mt="100px">
-          <ListItem>
-            <Menu>
-              <Link href={`/dashboard/${params.id}`}>
-                <MenuButton
-                  px={12}
-                  py={2}
-                  m="10px"
-                  position="fixed"
-                  ml="-5"
-                  transition="all 0.2s"
-                  borderRadius="md"
-                  _hover={{ bg: "white" }}
-                  _expanded={{ bg: "blue.400" }}
-                  _focus={{ boxShadow: "outline" }}
-                >
-                  <Text
-                    display="flex"
-                    flexDirection="row"
-                    fontSize="sm"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    color="#FFF"
-                    gap="20px"
-                    _hover={{ color: "black" }}
-                  >
-                    <BsThreeDots />
-                    Dashboard
-                  </Text>
-                </MenuButton>
-              </Link>
-            </Menu>
-          </ListItem>
-          <ListItem>
-            <Menu>
-              <Link href={`/analyst/${params.id}`}>
-                <MenuButton
-                  px={12}
-                  py={2}
-                  m="60px"
-                  position="fixed"
-                  ml="-5"
-                  transition="all 0.2s"
-                  borderRadius="md"
-                  _hover={{ bg: "gray.200" }}
-                  _expanded={{ bg: "blue.400" }}
-                  _focus={{ boxShadow: "outline" }}
-                >
-                  <Text
-                    display="flex"
-                    flexDirection="row"
-                    fontSize="sm"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    color="#FFF"
-                    _hover={{ color: "white" }}
-                    gap="20px"
-                  >
-                    <BsThreeDots />
-                    Analysts
-                  </Text>
-                </MenuButton>
-              </Link>
-            </Menu>
-          </ListItem>
+          <Button
+            backgroundColor="transparent"
+            paddingX="30px"
+            color="#000000"
+            _active={{ backgroundColor: "white", color: "#24CEDE" }}
+            _focus={{ backgroundColor: "white", color: "#24CEDE" }}
+            _hover={{ backgroundColor: "white", color: "#24CEDE" }}
+            onClick={() => router.push("/")}
+            leftIcon={<FaFileAlt />}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            Resultados
+          </Button>
 
-          <ListItem>
-            <Menu>
-              <Link href={`/patients/${params.id}`}>
-                <MenuButton
-                  px={12}
-                  py={2}
-                  m="110px"
-                  position="fixed"
-                  ml="-5"
-                  transition="all 0.2s"
-                  borderRadius="md"
-                  _hover={{ bg: "gray.200" }}
-                  _expanded={{ bg: "blue.400" }}
-                  _focus={{ boxShadow: "outline" }}
-                >
-                  <Text
-                    display="flex"
-                    flexDirection="row"
-                    fontSize="sm"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    color="#FFF"
-                    gap="20px"
-                  >
-                    <BsThreeDots />
-                    Patients
-                  </Text>
-                </MenuButton>
-              </Link>
-            </Menu>
-          </ListItem>
+          <Button
+            backgroundColor="transparent"
+            paddingX="30px"
+            color="#000000"
+            _active={{ backgroundColor: "white", color: "#24CEDE" }}
+            _focus={{ backgroundColor: "white", color: "#24CEDE" }}
+            _hover={{ backgroundColor: "white", color: "#24CEDE" }}
+            onClick={() => router.push("/")}
+            leftIcon={<FaNotesMedical />}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            Pacientes
+          </Button>
 
-          <ListItem>
-            <Menu>
-              <MenuButton
-                px={12}
-                py={2}
-                m="160px"
-                position="fixed"
-                ml="-5"
-                transition="all 0.2s"
-                borderRadius="md"
-                _hover={{ bg: "white" }}
-                _expanded={{ bg: "blue.400" }}
-                _focus={{ boxShadow: "outline" }}
-              >
-                <Text
-                  display="flex"
-                  flexDirection="row"
-                  fontSize="sm"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  color="white"
-                  _hover={{ color: "white" }}
-                  gap="20px"
-                >
-                  <BsThreeDots />
-                  Diagnostics
-                </Text>
-              </MenuButton>
-              <MenuList>
-                <Link href={`/diagnostics/${params.id}`}>
-                  <MenuItem color="black">All Diagnostics</MenuItem>
-                </Link>
-                <MenuItem color="black">New Diagnostic</MenuItem>
-              </MenuList>
-            </Menu>
-          </ListItem>
+          <Button
+            backgroundColor="transparent"
+            paddingX="30px"
+            color="#000000"
+            _active={{ backgroundColor: "white", color: "#24CEDE" }}
+            _focus={{ backgroundColor: "white", color: "#24CEDE" }}
+            _hover={{ backgroundColor: "white", color: "#24CEDE" }}
+            onClick={() => router.push("/")}
+            leftIcon={<CiMoneyCheck1 />}
+            justifyContent="start"
+            alignItems="center"
+            marginX="0px"
+          >
+            <Text marginLeft="10px">Planos</Text>
+          </Button>
 
-          <ListItem>
-            <Menu>
-              <MenuButton
-                px={12}
-                py={2}
-                m="210px"
-                position="fixed"
-                transition="all 0.2s"
-                borderRadius="md"
-                ml="-5"
-                _hover={{ bg: "gray.200" }}
-                _expanded={{ bg: "blue.400" }}
-                _focus={{ boxShadow: "outline" }}
-              >
-                <Text
-                  display="flex"
-                  flexDirection="row"
-                  fontSize="sm"
-                  justifyContent="center"
-                  color="white"
-                  _hover={{ color: "white" }}
-                  alignItems="center"
-                  gap="20px"
-                >
-                  <BsThreeDots />
-                  Settings
-                </Text>
-              </MenuButton>
-              <MenuList>
-                <MenuItem color="black">Clinic Profile</MenuItem>
-                <MenuDivider />
-                <MenuItem color="black">Platform Settings</MenuItem>
-                <MenuItem color="red.500" onClick={() => handleLogout()}>
-                  Logout
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </ListItem>
-        </List>
-      </Box>
+          <Button
+            backgroundColor="transparent"
+            paddingX="20px"
+            color="#000000"
+            _active={{ backgroundColor: "white", color: "#24CEDE" }}
+            _focus={{ backgroundColor: "white", color: "#24CEDE" }}
+            _hover={{ backgroundColor: "white", color: "#24CEDE" }}
+            onClick={() => router.push("/")}
+            leftIcon={<BiSolidReport />}
+            justifyContent="space-evenly"
+          >
+            Relatorios
+          </Button>
+        </Stack>
+      </Stack>
 
       <Flex
         width={sidebarVisible === true ? "82%" : "100%"}
