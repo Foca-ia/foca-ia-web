@@ -3,12 +3,12 @@ import "@mantine/dates/styles.css";
 import "@mantine/dropzone/styles.css";
 import "@mantine/code-highlight/styles.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import { Providers } from "./providers";
 import { MantineProvider } from "@mantine/core";
 import { AuthProvider } from "@/Context/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Foca.ia",

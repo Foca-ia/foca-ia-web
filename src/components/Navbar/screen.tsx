@@ -10,6 +10,7 @@ import {
   Stack,
   Button,
   Input,
+  Divider,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { BsLayoutSidebar, BsThreeDots } from "react-icons/bs";
@@ -67,7 +68,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
           quality={100}
           alt="Foca.ia logo"
         />
-        <Stack marginTop="50px" gap="10px">
+        <Stack marginTop="50px" gap="10px" marginLeft="-10px">
           <Button
             backgroundColor="transparent"
             paddingX="30px"
@@ -75,7 +76,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/dashboard/${params.id}`)}
             leftIcon={<RxDashboard />}
             alignItems="center"
             justifyContent="space-between"
@@ -120,7 +121,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/dashboard/${params.id}`)}
             leftIcon={<CiMoneyCheck1 />}
             justifyContent="start"
             alignItems="center"
