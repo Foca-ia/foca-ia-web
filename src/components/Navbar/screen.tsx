@@ -10,10 +10,12 @@ import {
   Stack,
   Button,
   Input,
-  Divider,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Menu,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { BsLayoutSidebar, BsThreeDots } from "react-icons/bs";
 import logo from "../../../public/assets/images/LOGO FOCA 3-02.png";
 import { useParams, useRouter } from "next/navigation";
 import useAuth from "@/Context/AuthProvider/useAuth";
@@ -24,6 +26,10 @@ import { FaFileAlt, FaNotesMedical } from "react-icons/fa";
 import { IconTriangleInvertedFilled } from "@tabler/icons-react";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { BiSolidReport } from "react-icons/bi";
+import {
+  TbLayoutSidebarLeftCollapse,
+  TbLayoutSidebarRightCollapse,
+} from "react-icons/tb";
 
 const DrawerMenu = ({ children }: React.PropsWithChildren) => {
   const [open, setOpen] = useState(false);
@@ -91,7 +97,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/analyst/${params.id}`)}
             leftIcon={<FaFileAlt />}
             alignItems="center"
             justifyContent="space-between"
@@ -106,7 +112,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/patients/${params.id}`)}
             leftIcon={<FaNotesMedical />}
             alignItems="center"
             justifyContent="space-between"
@@ -121,7 +127,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push(`/dashboard/${params.id}`)}
+            onClick={() => router.push(`/plans/${params.id}`)}
             leftIcon={<CiMoneyCheck1 />}
             justifyContent="start"
             alignItems="center"
@@ -137,7 +143,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/reports/${params.id}`)}
             leftIcon={<BiSolidReport />}
             justifyContent="space-evenly"
           >
@@ -178,7 +184,11 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
               backgroundColor="transparent"
               onClick={() => setSidebarVisible(!sidebarVisible)}
             >
-              <BsLayoutSidebar size={30} />
+              {sidebarVisible === true ? (
+                <TbLayoutSidebarLeftCollapse size={30} />
+              ) : (
+                <TbLayoutSidebarRightCollapse size={30} />
+              )}
             </Button>
 
             <Stack>
@@ -202,9 +212,18 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
               <Text>Edmauro Goma</Text>
               <Text fontWeight="bold">Hospital Central</Text>
             </Stack>
-            <Button backgroundColor="transparent">
-              <IconTriangleInvertedFilled size={10} />
-            </Button>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rightIcon={<IconTriangleInvertedFilled size={10} />}
+              />
+
+              <MenuList>
+                <MenuItem>Perfil</MenuItem>
+                <MenuItem>Suporte</MenuItem>
+                <MenuItem color="red">Sair</MenuItem>
+              </MenuList>
+            </Menu>
           </Stack>
         </Box>
         {children}

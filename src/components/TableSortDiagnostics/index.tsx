@@ -17,8 +17,16 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
-import { Box, Button, Stack } from "@chakra-ui/react";
-import { BsPlus, BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
+import {
+  Box,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack,
+} from "@chakra-ui/react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { CreatePatientModal } from "../create-patient-modal";
 import { useRouter } from "next/navigation";
 
@@ -178,7 +186,16 @@ export function TableSortDiagnostics() {
       <Table.Td>{row.date}</Table.Td>
       <Table.Td>
         <Button backgroundColor="transparent">
-          <BsThreeDotsVertical />
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<BsThreeDotsVertical size={10} />}
+            />
+
+            <MenuList>
+              <MenuItem>Ver mais</MenuItem>
+            </MenuList>
+          </Menu>
         </Button>
       </Table.Td>
     </Table.Tr>
@@ -219,6 +236,9 @@ export function TableSortDiagnostics() {
         verticalSpacing="xs"
         miw={700}
         layout="fixed"
+        style={{
+          marginTop: "30px",
+        }}
       >
         <Table.Tbody
           style={{
