@@ -219,19 +219,18 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
       </Stack>
 
       <Flex
-        width={sidebarVisible === true ? "82%" : "100%"}
-        marginRight={sidebarVisible === true ? "-10px" : "0px  "}
+        width={sidebarVisible ? "82%" : "100%"}
         height="100vh"
         backgroundColor="#ffffff"
         borderTopRadius="40px"
         paddingX={10}
         zIndex={1}
         position="absolute"
-        left={sidebarVisible === true ? 270 : 0}
+        left={sidebarVisible ? "270px" : 0}
         top={0}
         flexDirection="column"
         marginLeft={sidebarVisible ? "20px" : "0px"}
-        transition="margin-left 0.5s ease-in-out"
+        transition="margin-left 0.8s ease-in-out"
         overflowY="auto"
       >
         <Box
@@ -368,7 +367,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             zIndex="10"
             position="absolute"
             top="100px"
-            left="50%"
+            left="51.5%"
             transform="translateX(-50%)"
             transition="opacity 0.5s ease-in-out"
             opacity={showPreview ? 1 : 0}
@@ -380,7 +379,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                   key={result.id}
                   color="#FFF"
                   marginBottom="5px"
-                  cursor="pointer"
+                  cursor="p ointer"
                   _hover={{ color: "#24CEDE" }}
                   onClick={() => navigateToSearchResult(result.id)}
                 >
