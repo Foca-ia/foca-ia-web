@@ -237,7 +237,7 @@ export function TableSortDiagnostics() {
         miw={700}
         layout="fixed"
         style={{
-          marginTop: "30px",
+          marginTop: "10px",
         }}
       >
         <Table.Tbody

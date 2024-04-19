@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import {
@@ -14,6 +14,9 @@ import {
   MenuList,
   MenuItem,
   Menu,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import logo from "../../../public/assets/images/LOGO FOCA 3-02.png";
@@ -25,7 +28,7 @@ import { FaFileAlt, FaNotesMedical } from "react-icons/fa";
 
 import { IconTriangleInvertedFilled } from "@tabler/icons-react";
 import { CiMoneyCheck1 } from "react-icons/ci";
-import { BiSolidReport } from "react-icons/bi";
+import { BiSearch, BiSolidReport } from "react-icons/bi";
 import {
   TbLayoutSidebarLeftCollapse,
   TbLayoutSidebarRightCollapse,
@@ -35,10 +38,72 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
   const [open, setOpen] = useState(false);
   const [childrenDrawer, setChildrenDrawer] = useState(false);
   const [sidebarVisible, setSidebarVisible] = useState<boolean>(true);
-
+  const [analysts, setAnalysts] = useState<any[]>([]);
+  const [patients, setPatients] = useState<any[]>([]);
+  const [results, setResults] = useState<any[]>([]);
   const auth = useAuth();
   const router = useRouter();
   const path = usePathname();
+
+  const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [showPreview, setShowPreview] = useState(false);
+
+  useEffect(() => {
+    // Simulando busca de dados iniciais ao montar o componente
+    const fetchInitialData = async () => {
+      const mockAnalysts = [
+        { id: 1, name: "John Doe" },
+        { id: 2, name: "Jane Smith" },
+        { id: 3, name: "Alice Johnson" },
+      ];
+      const mockPatients = [
+        { id: 1, name: "Patient A" },
+        { id: 2, name: "Patient B" },
+        { id: 3, name: "Patient C" },
+      ];
+      const mockResults = [
+        { id: 1, title: "Result 1" },
+        { id: 2, title: "Result 2" },
+        { id: 3, title: "Result 3" },
+      ];
+      setAnalysts(mockAnalysts);
+      setPatients(mockPatients);
+      setResults(mockResults);
+    };
+
+    fetchInitialData();
+  }, []);
+
+  const handleSearch = (value: string) => {
+    setQuery(value);
+
+    const allResults = [...analysts, ...patients, ...results];
+
+    const filteredResults = allResults.filter((result) => {
+      if (
+        result.name &&
+        result.name.toLowerCase().includes(value.toLowerCase())
+      ) {
+        return true;
+      }
+      if (
+        result.title &&
+        result.title.toLowerCase().includes(value.toLowerCase())
+      ) {
+        return true;
+      }
+      return false;
+    });
+
+    setSearchResults(filteredResults);
+    setShowPreview(value.trim() !== "");
+  };
+
+  const navigateToSearchResult = (id: number) => {
+    // Lógica para navegar para a página de detalhes do resultado de pesquisa
+    console.log("Navigate to search result with id:", id);
+  };
 
   const handleLogout = async () => {
     try {
@@ -245,14 +310,27 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             </Stack>
           </Stack>
 
-          <Input
-            backgroundColor="#394447"
-            borderRadius="25px"
-            color="#F2F2F2"
-            placeholder="Pesquisar"
-            width="50%"
-            height="50px"
-          />
+          <InputGroup width="50%" height="50px" alignItems="center">
+            <InputRightElement
+              marginRight="20px"
+              marginTop="5px"
+              pointerEvents="none"
+              children={<BiSearch color="#F2F2F2" size={25} />}
+            />
+            <Input
+              backgroundColor="#394447"
+              borderRadius="25px"
+              color="#F2F2F2"
+              placeholder="Pesquisar"
+              width="100%"
+              height="50px"
+              value={query}
+              onChange={(e) => handleSearch(e.target.value)}
+              _hover={{ backgroundColor: "#394447" }}
+              _active={{ backgroundColor: "#394447" }}
+              _focus={{ backgroundColor: "#394447" }}
+            />
+          </InputGroup>
 
           <Stack direction="row" alignItems="center" gap={3}>
             <Avatar></Avatar>
@@ -274,6 +352,49 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             </Menu>
           </Stack>
         </Box>
+
+        {showPreview && (
+          <Box
+            backgroundColor="#394447"
+            borderRadius="10px"
+            boxShadow="0 4px 20px #24CEDE, 0 1px 3px #24CEDE"
+            color="#FFF"
+            marginTop="10px"
+            padding="10px"
+            width="50%"
+            height="100px"
+            overflowY="auto"
+            alignSelf="center"
+            zIndex="10"
+            position="absolute"
+            top="100px"
+            left="50%"
+            transform="translateX(-50%)"
+            transition="opacity 0.5s ease-in-out"
+            opacity={showPreview ? 1 : 0}
+            animation="fade-in 0.5s ease-in-out"
+          >
+            {searchResults.length > 0 ? (
+              searchResults.map((result) => (
+                <Text
+                  key={result.id}
+                  color="#FFF"
+                  marginBottom="5px"
+                  cursor="pointer"
+                  _hover={{ color: "#24CEDE" }}
+                  onClick={() => navigateToSearchResult(result.id)}
+                >
+                  {result.name ? result.name : result.title}
+                </Text>
+              ))
+            ) : (
+              <Text color="#FFF" marginBottom="5px">
+                Nenhum resultado encontrado
+              </Text>
+            )}
+          </Box>
+        )}
+
         {children}
       </Flex>
     </Box>
