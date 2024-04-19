@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import logo from "../../../public/assets/images/LOGO FOCA 3-02.png";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import useAuth from "@/Context/AuthProvider/useAuth";
 import { API } from "@/services/api";
 import { RxDashboard } from "react-icons/rx";
@@ -38,6 +38,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
 
   const auth = useAuth();
   const router = useRouter();
+  const path = usePathname();
 
   const handleLogout = async () => {
     try {
@@ -97,7 +98,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             _active={{ backgroundColor: "white", color: "#24CEDE" }}
             _focus={{ backgroundColor: "white", color: "#24CEDE" }}
             _hover={{ backgroundColor: "white", color: "#24CEDE" }}
-            onClick={() => router.push(`/analyst/${params.id}`)}
+            onClick={() => router.push(`/results/${params.id}`)}
             leftIcon={<FaFileAlt />}
             alignItems="center"
             justifyContent="space-between"
@@ -192,8 +193,55 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
             </Button>
 
             <Stack>
-              <Heading>Overview</Heading>
-              <Text marginTop="-10px">Dashboard</Text>
+              <Heading>
+                {(() => {
+                  const route = path.split("/")[1];
+                  switch (route) {
+                    case "dashboard":
+                      return "Dashboard";
+                    case "analyst":
+                      return "Analista";
+                    case "results":
+                      return "Resultados";
+                    case "patients":
+                      return "Pacientes";
+                    case "plans":
+                      return "Planos";
+                    case "reports":
+                      return "Relatorios";
+                    case "profile":
+                      return "Profile";
+                    case "settings":
+                      return "Settings";
+                    default:
+                      return route; // Se não corresponder a nenhum caso, apenas retorna a rota
+                  }
+                })()}
+              </Heading>
+              <Text marginTop="-10px">
+                {(() => {
+                  const route = path.split("/")[1];
+                  switch (route) {
+                    case "dashboard":
+                      return "Overview dos seus dados";
+                    case "results":
+                      return "Resultados dos seus pacientes";
+                    case "patients":
+                      return "Dados de seus pacientes";
+                    case "plans":
+                      return "Suas planos";
+                    case "reports":
+                      return "Seus Relatorios";
+                    case "profile":
+                      return "Profile";
+                    case "settings":
+                      return "Settings";
+                    // Adicione mais casos conforme necessário
+                    default:
+                      return route; // Se não corresponder a nenhum caso, apenas retorna a rota
+                  }
+                })()}
+              </Text>
             </Stack>
           </Stack>
 
