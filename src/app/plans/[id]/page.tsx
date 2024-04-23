@@ -51,7 +51,7 @@ function Plans() {
 
   useEffect(() => {
     handleGet();
-  }, [data]);
+  }, [data]); // Chama a função novamente quando as datas mudarem
 
   return (
     <Flex>
@@ -124,7 +124,10 @@ function Plans() {
             </Stack>
           </Box>
         </Stack>
-        <TableSortDiagnostics />
+
+        <Stack width="100%" marginTop="30px">
+          <TableSortDiagnostics />
+        </Stack>
 
         <Footer />
       </DrawerMenu>

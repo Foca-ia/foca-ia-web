@@ -6,6 +6,7 @@ import {
   Group,
   Text,
   Center,
+  TextInput,
   rem,
   keys,
 } from "@mantine/core";
@@ -13,29 +14,17 @@ import {
   IconSelector,
   IconChevronDown,
   IconChevronUp,
+  IconSearch,
+  IconDownload,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
-import {
-  Box,
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Stack,
-} from "@chakra-ui/react";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { CreatePatientModal } from "../create-patient-modal";
-import { useRouter } from "next/navigation";
+import { Box, Input, Stack } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 interface RowData {
   name: string;
   email: string;
   company: string;
-  result: string;
-  doenca: string;
-  age: string;
-  date: string;
 }
 
 interface ThProps {
@@ -101,46 +90,81 @@ const data = [
     name: "Athena Weissnat",
     company: "Little - Rippin",
     email: "Elouise.Prohaska@yahoo.com",
-    result: "Negativo",
-    doenca: "Malaria",
-    age: "24",
-    date: "12/04/2024",
   },
   {
     name: "Deangelo Runolfsson",
     company: "Greenfelder - Krajcik",
     email: "Kadin_Trantow87@yahoo.com",
-    result: "Positivo",
-    doenca: "Malaria",
-    age: "24",
-    date: "12/04/2024",
   },
   {
     name: "Danny Carter",
     company: "Kohler and Sons",
     email: "Marina3@hotmail.com",
-    result: "Negativo",
-    doenca: "Malaria",
-    age: "24",
-    date: "12/04/2024",
   },
   {
     name: "Trace Tremblay PhD",
     company: "Crona, Aufderhar and Senger",
     email: "Antonina.Pouros@yahoo.com",
-    result: "Negativo",
-    doenca: "Malaria",
-    age: "24",
-    date: "12/04/2024",
   },
   {
     name: "Derek Dibbert",
     company: "Gottlieb LLC",
     email: "Abagail29@hotmail.com",
-    result: "Negativo",
-    doenca: "Malaria",
-    age: "24",
-    date: "12/04/2024",
+  },
+  {
+    name: "Viola Bernhard",
+    company: "Funk, Rohan and Kreiger",
+    email: "Jamie23@hotmail.com",
+  },
+  {
+    name: "Austin Jacobi",
+    company: "Botsford - Corwin",
+    email: "Genesis42@yahoo.com",
+  },
+  {
+    name: "Hershel Mosciski",
+    company: "Okuneva, Farrell and Kilback",
+    email: "Idella.Stehr28@yahoo.com",
+  },
+  {
+    name: "Mylene Ebert",
+    company: "Kirlin and Sons",
+    email: "Hildegard17@hotmail.com",
+  },
+  {
+    name: "Lou Trantow",
+    company: "Parisian - Lemke",
+    email: "Hillard.Barrows1@hotmail.com",
+  },
+  {
+    name: "Dariana Weimann",
+    company: "Schowalter - Donnelly",
+    email: "Colleen80@gmail.com",
+  },
+  {
+    name: "Dr. Christy Herman",
+    company: "VonRueden - Labadie",
+    email: "Lilyan98@gmail.com",
+  },
+  {
+    name: "Katelin Schuster",
+    company: "Jacobson - Smitham",
+    email: "Erich_Brekke76@gmail.com",
+  },
+  {
+    name: "Melyna Macejkovic",
+    company: "Schuster LLC",
+    email: "Kylee4@yahoo.com",
+  },
+  {
+    name: "Pinkie Rice",
+    company: "Wolf, Trantow and Zulauf",
+    email: "Fiona.Kutch@hotmail.com",
+  },
+  {
+    name: "Brain Kreiger",
+    company: "Lueilwitz Group",
+    email: "Rico98@hotmail.com",
   },
 ];
 
@@ -149,6 +173,12 @@ export function TableSortDiagnostics() {
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
+
+  const handleExportCSV = () => {
+    // Lógica para exportar os dados em CSV
+    // Aqui você pode usar bibliotecas como 'react-csv' para facilitar a exportação
+    console.log("Exportar dados em CSV");
+  };
 
   const setSorting = (field: keyof RowData) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
@@ -165,60 +195,27 @@ export function TableSortDiagnostics() {
     );
   };
 
-  const router = useRouter();
-
-  const href = "/diagnostic-report/id";
-
-  const handleRoute = async () => {
-    await router.push(href);
-  };
-
   const rows = sortedData.map((row) => (
     <Table.Tr key={row.name}>
       <Table.Td>{row.name}</Table.Td>
-      <Table.Td>{row.result}</Table.Td>
-      <Table.Td>
-        <Text>{row.doenca}</Text>
-      </Table.Td>
-      <Table.Td>{row.age}</Table.Td>
-      <Table.Td>{row.date}</Table.Td>
-      <Table.Td>
-        <Button backgroundColor="transparent">
-          <Menu>
-            <MenuButton
-              as={Button}
-              rightIcon={<BsThreeDotsVertical size={10} />}
-            />
-
-            <MenuList>
-              <MenuItem>Ver mais</MenuItem>
-            </MenuList>
-          </Menu>
-        </Button>
-      </Table.Td>
+      <Table.Td>{row.email}</Table.Td>
+      <Table.Td>{row.company}</Table.Td>
     </Table.Tr>
   ));
 
   return (
     <ScrollArea>
-      {/* <Stack
-        display="flex"
-        height="50px"
-        flexDirection="row"
-        background="#F7F9FB"
+      <Stack
+        direction="row"
         alignItems="center"
         justifyContent="space-between"
-        p="8px"
-        mb="10"
-        borderRadius="8px"
+        width="100%"
+        display="flex"
       >
-        <CreatePatientModal />
-
         <TextInput
-          style={{
-            alignSelf: "center",
-          }}
-          placeholder="Search by any field"
+          placeholder="Pesquise por qualquer campo"
+          mb="md"
+          width="70%"
           leftSection={
             <IconSearch
               style={{ width: rem(16), height: rem(16) }}
@@ -228,69 +225,55 @@ export function TableSortDiagnostics() {
           value={search}
           onChange={handleSearchChange}
         />
-      </Stack> */}
+
+        <Stack direction="row">
+          <Box>
+            <Input
+              type="date"
+              placeholder={Date.now().toString()}
+              defaultValue={Date.now().toString()}
+            />
+          </Box>
+
+          <Button
+            variant="outline"
+            onClick={handleExportCSV}
+            alignItems="center"
+            leftIcon={<IconDownload />}
+          >
+            Exportar CSV
+          </Button>
+        </Stack>
+      </Stack>
+
       <Table
         horizontalSpacing="md"
         verticalSpacing="xs"
         miw={700}
         layout="fixed"
-        style={{
-          marginTop: "10px",
-        }}
       >
-        <Table.Tbody
-          style={{
-            backgroundColor: "#F7F9FB",
-            borderRadius: "20px",
-            border: "1px",
-            borderColor: "#E5E7EB",
-            "&:hover": {
-              backgroundColor: "#F7F9FB",
-            },
-          }}
-        >
+        <Table.Tbody>
           <Table.Tr>
             <Th
               sorted={sortBy === "name"}
               reversed={reverseSortDirection}
               onSort={() => setSorting("name")}
             >
-              Nome
+              Name
             </Th>
             <Th
-              sorted={sortBy === "result"}
+              sorted={sortBy === "email"}
               reversed={reverseSortDirection}
-              onSort={() => setSorting("result")}
+              onSort={() => setSorting("email")}
             >
-              Resultados
+              Email
             </Th>
             <Th
-              sorted={sortBy === "doenca"}
+              sorted={sortBy === "company"}
               reversed={reverseSortDirection}
-              onSort={() => setSorting("doenca")}
+              onSort={() => setSorting("company")}
             >
-              Doença
-            </Th>
-            <Th
-              sorted={sortBy === "age"}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting("age")}
-            >
-              Idade
-            </Th>
-            <Th
-              sorted={sortBy === "date"}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting("date")}
-            >
-              Data
-            </Th>
-            <Th
-              sorted={sortBy === "date"}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting("date")}
-            >
-              Ação
+              Company
             </Th>
           </Table.Tr>
         </Table.Tbody>
