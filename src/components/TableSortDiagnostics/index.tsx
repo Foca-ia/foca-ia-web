@@ -6,7 +6,6 @@ import {
   Group,
   Text,
   Center,
-  TextInput,
   rem,
   keys,
 } from "@mantine/core";
@@ -14,7 +13,6 @@ import {
   IconSelector,
   IconChevronDown,
   IconChevronUp,
-  IconSearch,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
 import {

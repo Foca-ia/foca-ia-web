@@ -293,7 +293,7 @@ const DrawerMenu = ({ children }: React.PropsWithChildren) => {
                     case "patients":
                       return "Dados de seus pacientes";
                     case "plans":
-                      return "Suas planos";
+                      return "Gerenciamento de seus planos";
                     case "reports":
                       return "Seus Relatorios";
                     case "profile":
