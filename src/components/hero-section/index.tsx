@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import axios from "axios";
+"use client";
+
+import React from "react";
 import {
   Box,
   Button,
@@ -12,48 +13,21 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { TypeAnimation } from "react-type-animation";
+
 import { MdOutlineMail } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import { Fade } from "react-awesome-reveal";
-import { Spin, message } from "antd";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleEmailChange = (event: any) => {
-    setEmail(event.target.value);
-  };
-
-  const handleSubmit = async () => {
-    if (email) {
-      setIsLoading(true);
-      try {
-        const response = await axios.post(
-          "https://script.google.com/macros/s/AKfycbxwiQUlcsSY1LxcxV-DiHqrLOwafTtNpDMfPnzNBomVS1P5QVORW_GkKlQIMu94mpE/exec",
-          { email }
-        );
-        if (response.data.result === "success") {
-          message.success("Email enviado com sucesso!");
-        } else {
-          message.error("Falha ao enviar email.");
-        }
-      } catch (error) {
-        message.error("Erro ao enviar email.");
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      message.success("Por favor, insira um email.");
-    }
-  };
-
+  const router = useRouter();
   return (
     <Stack
       display="flex"
       direction="row"
       alignItems="center"
-      marginTop={"100px"}
+      marginTop={"150px"}
       justifyContent="center"
       gap={170}
       flexWrap={"wrap"}
@@ -94,41 +68,34 @@ const Hero = () => {
 
         <Fade cascade damping={0.5} direction="up" triggerOnce>
           <Stack direction="row" gap={4}>
-            <InputGroup width="100%">
-              <InputLeftElement pointerEvents="none">
-                <MdOutlineMail color="#24CEDE" size={20} />
-              </InputLeftElement>
-              <Input
-                placeholder="Entre na lista de espera da versão beta"
-                borderRadius={20}
-                _hover={{ borderColor: "#24CEDE" }}
-                _focus={{ borderColor: "#24CEDE" }}
-                _active={{ borderColor: "#24CEDE" }}
-                value={email}
-                onChange={handleEmailChange}
-              />
-            </InputGroup>
-
             <Button
               bg="#26CCE2"
               color="#f2f2f2"
               borderRadius={20}
-              w="150px"
+              gap={2}
               alignSelf="start"
               transition="all 0.3s ease-in-out"
               _hover={{
                 bg: "#7A7A7A",
                 color: "#26CCE2",
+                transform: "scale(1.1)", // Aumenta ligeiramente o tamanho do botão no hover
+                boxShadow: "0 0 10px rgba(0,0,0,0.2)", // Adiciona uma sombra sutil
               }}
-              onClick={handleSubmit}
-              isLoading={isLoading}
-              disabled={isLoading}
+              _active={{
+                transform: "scale(0.9)", // Reduz o tamanho do botão quando clicado
+              }}
+              _focus={{
+                outline: "none", // Remove a borda de foco padrão
+              }}
+              onClick={() => router.push("https://foca-ia.paperform.co/")}
             >
-              {isLoading ? (
-                <Spin indicator={<BiSend color="#f2f2f2" size={20} />} />
-              ) : (
-                <BiSend color="#f2f2f2" size={20} />
-              )}
+              <BiSend color="#f2f2f2" size={20} />
+              <Text
+                fontWeight={"bold"}
+                fontSize={{ base: "14px", md: "16px", lg: "18px" }}
+              >
+                Participe do teste beta
+              </Text>
             </Button>
           </Stack>
         </Fade>
