@@ -36,7 +36,6 @@ const Navbar = () => {
       position="fixed"
       width="90%"
       top="5"
-      left="14"
       zIndex={100}
       display="flex"
       flexDirection="row"

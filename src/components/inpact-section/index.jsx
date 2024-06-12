@@ -14,7 +14,7 @@ const Impact = () => {
       mt={{ base: "50px", md: "100px" }}
       mb={{ base: "50px", md: "100px" }}
       flexWrap={"wrap"}
-      padding={"20px"}
+      padding={"40px"}
       gap={{
         base: "20px",
         md: "50px",
@@ -51,13 +51,16 @@ const Impact = () => {
         justifyContent={"center"}
         gap={10}
         flexDirection={"Column"}
-        marginLeft={"5%"}
       >
         <Fade cascade damping={0.5} direction="up" triggerOnce>
           <Card
-            height="400px"
-            width="90%"
+            height="max-content"
+            width="100%"
             borderRadius={20}
+            alignItems={"center"}
+            justifyContent={"center"}
+            alignSelf={"center"}
+            display={"flex"}
             overflow="hidden"
             shadow={"lg"}
             dropShadow={"0 4px 20px #24CEDE, 0 1px 3px #24CEDE"}
@@ -65,28 +68,29 @@ const Impact = () => {
             boxShadow="0 2px 100px #24CEDE"
             backdropFilter="blur(10px)"
           >
-            <video
-              autoPlay
-              muted
-              loop
-              style={{
-                borderRadius: "20px",
-                objectFit: "cover",
-                width: "100%",
-                height: "100%",
-              }}
-            >
+            <video autoPlay muted loop>
               <source src="/assets/videos/people.mp4" type="video/mp4" />
             </video>
           </Card>
         </Fade>
 
-        <Fade cascade damping={0.5} direction="up" triggerOnce>
-          <Heading
+        <Fade
+          cascade
+          damping={0.5}
+          direction="up"
+          triggerOnce
+          style={{
+            marginTop: "100px",
+            alignItems: "center",
+            justifyContent: "center",
+            alignSelf: "center",
+          }}
+        >
+          <Text
             fontWeight={"bold"}
             borderRadius={"10px"}
             background="#FFF"
-            height={"40px"}
+            height={"30px"}
             padding={"10px"}
             width="max-content"
             alignItems={"center"}
@@ -94,7 +98,7 @@ const Impact = () => {
             display="flex"
           >
             Areas de Impacto
-          </Heading>
+          </Text>
         </Fade>
 
         <Stack
@@ -104,12 +108,9 @@ const Impact = () => {
             md: "30px",
             lg: "50px",
           }}
-          marginLeft={{
-            base: "50px",
-            md: "0px",
-            lg: "0px",
-          }}
           flexWrap={"wrap"}
+          justifyContent={"center"}
+          alignItems={"center"}
         >
           <Fade cascade damping={0.5} direction="up" triggerOnce>
             <Box

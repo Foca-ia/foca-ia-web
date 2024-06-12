@@ -16,22 +16,52 @@ const ProductVideoSection = () => {
     >
       <Fade cascade damping={0.5} direction="up" triggerOnce>
         <Text fontSize="18px" maxW={"450px"}>
-          Diagnosticos inovadores usando inteligência artificial. A Foca.ia não
-          apenas reduz significativamente o tempo de análise, mas também
-          aprimora exponencialmente a precisão dos diagnósticos.
+          A{" "}
+          <strong
+            style={{
+              color: "#00BFFF",
+            }}
+          >
+            Foca.ia
+          </strong>{" "}
+          está a concorrer no{" "}
+          <strong
+            style={{
+              color: "#00BFFF",
+            }}
+          >
+            Global Startup Awards 2024
+          </strong>{" "}
+          na categoria de Melhor Solução de Saúde do Ano. Nossa plataforma
+          avançada agiliza o processo de análises diagnósticas de exames
+          laboratoriais utilizando Inteligência Artificial, oferecendo
+          resultados precisos e rápidos, reduzindo significativamente as longas
+          filas nos hospitais.
         </Text>
       </Fade>
 
       <Fade cascade damping={0.5} direction="up" triggerOnce>
-        <Box width="500px" height="300px" background="gray" borderRadius="20px">
-          <iframe
-            width="500"
-            height="300"
-            src="https://www.youtube.com/embed/gi6J_WjjNhE"
-            title="Gemini: projetado com base em segurança e responsabilidade"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            style={{ borderRadius: "20px" }}
-          ></iframe>
+        <Box
+          width="500px"
+          height="300px"
+          borderRadius="20px"
+          alignItems={"center"}
+          justifyContent={"center"}
+          display="flex"
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            style={{
+              borderRadius: "20px",
+              objectFit: "cover",
+              width: "90%",
+              height: "90%",
+            }}
+          >
+            <source src="/assets/videos/GSA.mp4" type="video/mp4" />
+          </video>
         </Box>
       </Fade>
     </Stack>

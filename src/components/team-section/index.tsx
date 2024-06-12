@@ -1,9 +1,6 @@
 import { Box, Button, Card, Heading, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
-import EducationImage from "../../../public/assets/images/education.jpeg";
-import SaudeImage from "../../../public/assets/images/saude.jpeg";
-import TechImage from "../../../public/assets/images/tecnology.jpeg";
 import { Fade } from "react-awesome-reveal";
 import teamImage from "../../../public/assets/images/team.jpeg";
 
@@ -57,7 +54,7 @@ const Team = () => {
       >
         <Fade cascade damping={0.5} direction="up" triggerOnce>
           <Card
-            height="400px"
+            maxHeight="400px"
             width="90%"
             borderRadius={20}
             overflow="hidden"

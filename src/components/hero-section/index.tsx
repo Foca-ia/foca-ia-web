@@ -1,6 +1,5 @@
-"use client";
-
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -13,19 +12,48 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { TypeAnimation } from "react-type-animation";
-
 import { MdOutlineMail } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import { Fade } from "react-awesome-reveal";
+import { Spin, message } from "antd";
 
 const Hero = () => {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleEmailChange = (event: any) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    if (email) {
+      setIsLoading(true);
+      try {
+        const response = await axios.post(
+          "https://script.google.com/macros/s/AKfycbxwiQUlcsSY1LxcxV-DiHqrLOwafTtNpDMfPnzNBomVS1P5QVORW_GkKlQIMu94mpE/exec",
+          { email }
+        );
+        if (response.data.result === "success") {
+          message.success("Email enviado com sucesso!");
+        } else {
+          message.error("Falha ao enviar email.");
+        }
+      } catch (error) {
+        message.error("Erro ao enviar email.");
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      message.success("Por favor, insira um email.");
+    }
+  };
+
   return (
     <Stack
       display="flex"
       direction="row"
       alignItems="center"
-      marginTop={"50px"}
+      marginTop={"100px"}
       justifyContent="center"
       gap={170}
       flexWrap={"wrap"}
@@ -76,6 +104,8 @@ const Hero = () => {
                 _hover={{ borderColor: "#24CEDE" }}
                 _focus={{ borderColor: "#24CEDE" }}
                 _active={{ borderColor: "#24CEDE" }}
+                value={email}
+                onChange={handleEmailChange}
               />
             </InputGroup>
 
@@ -90,8 +120,15 @@ const Hero = () => {
                 bg: "#7A7A7A",
                 color: "#26CCE2",
               }}
+              onClick={handleSubmit}
+              isLoading={isLoading}
+              disabled={isLoading}
             >
-              <BiSend color="#f2f2f2" size={20} />
+              {isLoading ? (
+                <Spin indicator={<BiSend color="#f2f2f2" size={20} />} />
+              ) : (
+                <BiSend color="#f2f2f2" size={20} />
+              )}
             </Button>
           </Stack>
         </Fade>
