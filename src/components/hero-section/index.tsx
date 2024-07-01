@@ -87,7 +87,11 @@ const Hero = () => {
               _focus={{
                 outline: "none", // Remove a borda de foco padrão
               }}
-              onClick={() => router.push("https://foca-ia.paperform.co/")}
+              onClick={() =>
+                router.push(
+                  "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAZ__k2hSYNUOVM1UlhQQURZUlpXUEYxQzk2RjhFR0NWWC4u"
+                )
+              }
             >
               <BiSend color="#f2f2f2" size={20} />
               <Text
