@@ -20,14 +20,14 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     }
   }, []);
 
-  async function authenticate(email: string, password: string) {
+  async function authenticate(username: string, password: string) {
     const response = await apiManager
-      .authenticate(email, password)
+      .authenticate(username, password)
       .then((response) => {
         return response.data;
       });
 
-    const payload = { token: response.token, email };
+    const payload = { token: response.token, username };
 
     setUser(payload);
     setUserLocalStorage(payload);

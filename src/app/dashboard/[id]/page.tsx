@@ -35,21 +35,41 @@ import LineAreachart from "@/components/LineAreaChart";
 import Image from "next/image";
 import LineImage from "../../../../public/assets/images/LineComponent.png";
 import Footer from "@/components/footer";
+import { TableSortPatients } from "@/components/TableSortPatients";
+import { ApiManager } from "@/services/api";
+import { IPatient } from "@/services/types";
+import { useEffect, useState } from "react";
 
 function Dashboard() {
-  const params = useParams();
+  const [error, setError] = useState(false);
+  const [patientsData, setPatientsData] = useState<IPatient | any>();
 
+  const apiManager = new ApiManager();
+  const params = useParams();
   const twoColors = { "0%": "#108ee9", "100%": "#222233" };
+
+  const handleGetData = async () => {
+    try {
+      await apiManager.getPatients().then((response) => {
+        return response.data;
+      });
+    } catch (error) {
+      console.log(error);
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    handleGetData();
+  }, []);
 
   return (
     <Flex flexDirection="column" width="100%">
       <DrawerMenu>
         <Box marginTop="70px" width="100%" height="100px">
-          <TableSortDiagnostics />
-
           <Stack
             width="100%"
-            marginTop="70px"
+            marginTop="5px"
             direction="row"
             gap="20px"
             flexWrap="wrap"
@@ -259,6 +279,8 @@ function Dashboard() {
               </Stack>
             </Flex>
           </Stack>
+          <TableSortPatients data={patientsData} />
+
           <Footer />
         </Box>
       </DrawerMenu>

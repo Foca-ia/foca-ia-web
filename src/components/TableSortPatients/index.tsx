@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   ScrollArea,
@@ -8,7 +8,6 @@ import {
   Center,
   TextInput,
   rem,
-  keys,
 } from "@mantine/core";
 import {
   IconSelector,
@@ -17,18 +16,11 @@ import {
   IconSearch,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
-import { Box, Button, Stack } from "@chakra-ui/react";
+import { Button, Stack } from "@chakra-ui/react";
 import { BsPlus, BsTrash } from "react-icons/bs";
 import { CreatePatientModal } from "../create-patient-modal";
-import { useParams, useRouter } from "next/navigation";
-import { PatientRecordModal } from "../patient-record-modal";
-
-interface RowData {
-  id: string;
-  name: string;
-  morada: string;
-  naturalidade: string;
-}
+import { useRouter } from "next/navigation";
+import { IPatient } from "@/services/types";
 
 interface ThProps {
   children: React.ReactNode;
@@ -59,16 +51,22 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
   );
 }
 
-function filterData(data: RowData[], search: string) {
+function filterData(data: IPatient[], search: string) {
   const query = search.toLowerCase().trim();
   return data.filter((item) =>
-    keys(data[0]).some((key) => item[key].toLowerCase().includes(query))
+    Object.keys(item).some((key) => {
+      const keyValue = item[key as keyof IPatient];
+      if (typeof keyValue === "string") {
+        return keyValue.toLowerCase().includes(query);
+      }
+      return false; // Handle other types as needed
+    })
   );
 }
 
 function sortData(
-  data: RowData[],
-  payload: { sortBy: keyof RowData | null; reversed: boolean; search: string }
+  data: IPatient[],
+  payload: { sortBy: keyof IPatient | null; reversed: boolean; search: string }
 ) {
   const { sortBy } = payload;
 
@@ -79,22 +77,25 @@ function sortData(
   return filterData(
     [...data].sort((a, b) => {
       if (payload.reversed) {
-        return b[sortBy].localeCompare(a[sortBy]);
+        return String(b[sortBy]).localeCompare(String(a[sortBy]));
       }
-
-      return a[sortBy].localeCompare(b[sortBy]);
+      return String(a[sortBy]).localeCompare(String(b[sortBy]));
     }),
     payload.search
   );
 }
 
-export function TableSortPatients({ data }: { data: any[] }) {
+export const TableSortPatients: React.FC<{ data: IPatient[] }> = ({ data }) => {
   const [search, setSearch] = useState("");
   const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
+  const [sortBy, setSortBy] = useState<keyof IPatient | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
-  const setSorting = (field: keyof RowData) => {
+  useEffect(() => {
+    setSortedData(data); // Update sortedData when data changes
+  }, [data]);
+
+  const setSorting = (field: keyof IPatient) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
     setSortBy(field);
@@ -111,35 +112,38 @@ export function TableSortPatients({ data }: { data: any[] }) {
 
   const router = useRouter();
 
-  const params = useParams();
-
   const handleRoute = async (href: any) => {
     await router.push(href);
   };
 
-  console.log(data);
-
-  const rows = data.map((row) => (
-    <Table.Tr key={row.patient_id}>
-      <Table.Td>
-        <Button
-          fontWeight="normal"
-          onClick={() => handleRoute(`/patients-profile/${row.patient_id}`)}
-          bgColor="white"
-        >
-          {row.name}
-        </Button>
-      </Table.Td>
-      <Table.Td>{row.morada}</Table.Td>
-      <Table.Td>{row.naturalidade}</Table.Td>
-      <Table.Td>
-        <PatientRecordModal id={row.patient_id} />
-      </Table.Td>
-      <Table.Td>
-        <Button leftIcon={<BsTrash color="red" />}>Delete</Button>
+  const rows = sortedData ? (
+    sortedData.map((row) => (
+      <Table.Tr key={row.id}>
+        <Table.Td>
+          <Button
+            fontWeight="normal"
+            onClick={() => handleRoute(`/patients-profile/${row.id}`)}
+            bgColor="white"
+          >
+            {row.name}
+          </Button>
+        </Table.Td>
+        <Table.Td>{row.email}</Table.Td>
+        <Table.Td>{row.address}</Table.Td>
+        <Table.Td>
+          <Button leftIcon={<BsTrash color="red" />}>Delete</Button>
+        </Table.Td>
+      </Table.Tr>
+    ))
+  ) : (
+    <Table.Tr>
+      <Table.Td colSpan={0}>
+        <Text fw={500} ta="center">
+          Nothing found
+        </Text>
       </Table.Td>
     </Table.Tr>
-  ));
+  );
 
   return (
     <ScrollArea>
@@ -153,6 +157,7 @@ export function TableSortPatients({ data }: { data: any[] }) {
         p="8px"
         mb="10"
         borderRadius="8px"
+        marginTop={"50px"}
       >
         <CreatePatientModal />
 
@@ -160,7 +165,7 @@ export function TableSortPatients({ data }: { data: any[] }) {
           style={{
             alignSelf: "center",
           }}
-          placeholder="Search by any field"
+          placeholder="Pesquisar"
           leftSection={
             <IconSearch
               style={{ width: rem(16), height: rem(16) }}
@@ -182,35 +187,23 @@ export function TableSortPatients({ data }: { data: any[] }) {
               Name
             </Th>
             <Th
-              sorted={sortBy === "morada"}
+              sorted={sortBy === "email"}
               reversed={reverseSortDirection}
-              onSort={() => setSorting("morada")}
+              onSort={() => setSorting("email")}
             >
               Email
             </Th>
             <Th
-              sorted={sortBy === "naturalidade"}
+              sorted={sortBy === "address"}
               reversed={reverseSortDirection}
-              onSort={() => setSorting("naturalidade")}
+              onSort={() => setSorting("address")}
             >
-              Naturalidade
+              Address
             </Th>
           </Table.Tr>
         </Table.Tbody>
-        <Table.Tbody>
-          {rows.length > 0 ? (
-            rows
-          ) : (
-            <Table.Tr>
-              <Table.Td colSpan={Object.keys(data).length}>
-                <Text fw={500} ta="center">
-                  Nothing found
-                </Text>
-              </Table.Td>
-            </Table.Tr>
-          )}
-        </Table.Tbody>
+        <Table.Tbody>{rows}</Table.Tbody>
       </Table>
     </ScrollArea>
   );
-}
+};

@@ -1,7 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Endpoints } from "./endpoints";
-import { ICreateOrganization, IOrganization } from "./types";
+import {
+  ICreateOrganization,
+  ICreatePatient,
+  ICreateUser,
+  IOrganization,
+} from "./types";
 
 export const API = axios.create({
   baseURL: process.env.LOCAL_HOST,
@@ -31,10 +36,43 @@ export class ApiManager implements Endpoints {
     return await API.delete(`organization/organization/${id}/`);
   }
 
-  async authenticate(email: string, password: string) {
-    return await API.post("/auth/token/", {
-      email,
-      password,
-    });
+  async authenticate(username: string, password: string) {
+    return await API.post(
+      "/auth/token",
+      {
+        username,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+  }
+
+  async createUser(data: ICreateUser, organization_id: string) {
+    return API.post(`/user/organization/${organization_id}`, data);
+  }
+
+  async createPatient(data: ICreatePatient) {
+    return API.post(`/patient/organization/`, data);
+  }
+  async getPatients() {
+    const { data } = await API.get(`/patient/organization/`);
+    return data;
+  }
+
+  async getPatientById(id: string) {
+    const { data } = await API.get(`/patient/organization/${id}/`);
+    return data;
+  }
+
+  async updatePatient(id: string, data: ICreatePatient) {
+    return API.put(`/patient/organization/${id}/`, data);
+  }
+
+  async deletePatient(id: string) {
+    return API.delete(`/patient/organization/${id}/`);
   }
 }

@@ -24,6 +24,7 @@ import Link from "next/link";
 import useAuth from "@/Context/AuthProvider/useAuth";
 import { useRouter } from "next/navigation";
 import { JwtPayload, decode } from "jsonwebtoken";
+import { ApiManager } from "@/services/api";
 
 const Login = () => {
   const auth = useAuth();
@@ -31,40 +32,37 @@ const Login = () => {
   const router = useRouter();
   const toast = useToast();
 
+  const apiManager = new ApiManager();
+
   const [status, setStatus] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [authResponse, setAuthResponse] = useState<any>();
 
-  const handleInputEmailChange = (e: any) => setEmail(e.target.value);
+  const handleInputUsernameChange = (e: any) => setUsername(e.target.value);
   const handleInputPasswordChange = (e: any) => setPassword(e.target.value);
   const [isLargerThan48em] = useMediaQuery("(min-width: 48em)");
 
   const onSubmit = async () => {
     setStatus(true);
     try {
-      await auth.authenticate(email, password);
+      await apiManager.authenticate(username, password).then((response) => {
+        setAuthResponse(response.data);
+      });
 
-      const token = auth.token;
+      const { access_token, user_id } = await authResponse;
 
-      const decodedToken = decode(token as string);
-      console.log(decodedToken);
-
-      if (!decodedToken) {
+      if (!access_token) {
         return null;
       }
 
-      if (
-        decodedToken &&
-        typeof decodedToken === "object" &&
-        "user_id" in decodedToken
-      ) {
-        const { user_id } = decodedToken;
+      if (typeof access_token === "string" && access_token !== "undefined") {
         router.push(`/dashboard/${user_id}`);
         setStatus(false);
         toast({
-          title: "Welcome to Akin.",
-          description: "Loading...",
+          title: "Bem vindo.",
+          description: "Carregando...",
           status: "success",
           duration: 9000,
           isClosable: true,
@@ -95,9 +93,17 @@ const Login = () => {
   };
 
   return (
-    <Stack color="white" width="100%" height="100%" direction="row">
+    <Stack
+      color="white"
+      width="100%"
+      height="100vh"
+      direction="row"
+      alignItems={"center"}
+      justifyContent={"center"}
+    >
       <Stack
         width={isLargerThan48em ? "50%" : "100%"}
+        marginTop={isLargerThan48em ? "-200px" : "300px"}
         alignItems="center"
         justifyContent="center"
       >
@@ -142,16 +148,16 @@ const Login = () => {
               fontWeight="normal"
               marginTop="20px"
             >
-              Endereco de Email
+              Seu nome de usuario
             </Heading>
             <Input
               variant="outline"
-              type="email"
+              type="username"
               color="gray.600"
               placeholder=""
               size="lg"
               shadow="base"
-              onChange={handleInputEmailChange}
+              onChange={handleInputUsernameChange}
               marginBottom="20px"
             />
             <Heading
@@ -213,18 +219,21 @@ const Login = () => {
       </Stack>
 
       {isLargerThan48em && (
-        <Stack width="50%" padding="20px">
-          <Box
-            width="100%"
-            height="100%"
-            marginBottom="20px"
-            display={{ base: "none", md: "block" }}
-          >
+        <Stack
+          margin={"auto"}
+          width={"50%"}
+          height={"100vh"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Box alignSelf={"center"} padding={"-40px"}>
             <Image
               src={loginbg}
-              height={800}
+              height={500}
               width={800}
               quality={100}
+              objectFit="cover"
+              layout="responsive"
               alt="login background"
             />
           </Box>
